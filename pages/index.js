@@ -49,8 +49,44 @@ const Home = (props) => {
                         </div>
                     </nav>
                 </header>
-
                 <main className="grid sm:grid-cols-5 w-full p-2 text-center min-h-screen gap-3">
+                    <div className="sm:col-span:5 md:col-span-5 p-3 rounded grid grid-cols-5">
+                        <div id="search" className="col-span-5 md:col-span-1 p-3">
+                            <input name="search" className="w-full text-sm placeholder-gray-400 font-semibold border border-dashed border-gray-400 text-blue-600 rounded" type="text" placeholder="Search" />
+                        </div>
+                        <div className="p-3 col-span-5 md:col-span-4 flex flex-col md:flex-row justify-between md:items-center gap-2">
+                            <h2 className="text-2xl font-sans inline font-extrabold text-black">Marketplace</h2>
+                            <ul className="list-none flex flex-col md:flex-row gap-3 text-left">
+                                <li className="flex flex-row justify-between md:justify-start md:flex-col gap-1">
+                                    <small className="text-gray-500 font-sans text-xs px-2">Sort by:</small>
+                                    <div className="flex flex-row items-center justify-start gap-1">
+                                        <select className="border-none py-0 pr-5 tracking-normal pl-0 text-sm font-semibold text-gray-900 rounded whitespace-nowrap">
+                                            <option>Date published: Newest</option>
+                                            <option>Date published: Oldest</option>
+                                            <option>Annual Profit: Low to High</option>
+                                            <option>Annual Profit: High to Low</option>
+                                            <option>Asking Price: Low to High</option>
+                                            <option>Asking Price: High to Low</option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li className="flex flex-row justify-between md:justify-start md:flex-col gap-1">
+                                    <small className="text-gray-500 font-sans text-xs">Hidden startups:</small>
+                                    <div className="flex flex-row items-center justify-start gap-1">
+                                        <input name="shwhdn" defaultChecked className="border border-gray-300 text-blue-600 rounded" type="checkbox" />
+                                        <label htmlFor="shwhdn" className="text-gray-900 leading-none font-bold text-sm">Show hidden startups</label>
+                                    </div>
+                                </li>
+                                <li className="flex flex-row justify-between md:justify-start md:flex-col gap-1">
+                                    <small className="text-gray-500 font-sans text-xs">Startups under offer:</small>
+                                    <div className="flex flex-row items-center justify-start gap-1">
+                                        <input name="huoff" className="border border-gray-300 text-blue-600 rounded" type="checkbox" />
+                                        <label htmlFor="huoff" className="text-gray-900 leading-none font-bold text-sm">Hide startups under offer</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                     <aside className="h-full bg-white text-left justify-start rounded-lg sm:col-span:5 md:col-span-1 p-3 max-h-screen flex flex-col gap-3 mb-6 md:mb-0">
                         <div className="flex flex-col gap-2 p-1">
                             <small className="text-gray-500 font-sans text-xs">Description:</small>
@@ -204,6 +240,9 @@ const Home = (props) => {
                         </div>
                     </aside>
                     <div id="content" className="sm:col-span-5 md:col-span-4 text-left flex flex-col p-3 gap-5">
+                        <div className="text-gray-400 text-xs font-semibold text-left">
+                            {startups && startups.length>0 ? startups.length + " startups shown" : ""}
+                        </div>
                         {(startups && startups.length > 0) ? startups.map(st => (
                             <div key={st.id} className="p-7 bg-gray-100 rounded border border-dashed border-gray-300 flex flex-col md:flex-row md:justify-evenly md:divide-x-2 md:divide-gray-300 hover:border-solid hover:bg-white">
                                 <section id={st.id + "_basics"} className="flex flex-col p-3 gap-4 w-full">
@@ -306,14 +345,13 @@ Home.getInitialProps = async function (context) {
     console.log("== context.req")
     let prtcl = 'https://'
     if (
-        context.req.headers.host.includes('localhost') || 
+        context.req.headers.host.includes('localhost') ||
         context.req.headers.host.includes('127.0.0')
-    )
-        { 
-            prtcl = 'http://' 
-        }
+    ) {
+        prtcl = 'http://'
+    }
 
-    let url = (prtcl + context.req.headers.host) +'/api/startups'
+    let url = (prtcl + context.req.headers.host) + '/api/startups'
     console.log("url ========== ", url)
     return fetch(url).then(r => r.json()).then(stp => {
         return { startups: stp }
