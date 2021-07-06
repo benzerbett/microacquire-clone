@@ -9,13 +9,13 @@ const Home = (props) => {
     return (
         <div className="flex flex-col items-center justify-start min-h-screen py-2">
             <Head>
-                <title>MicroAcquire</title>
+                <title>MicroAcquire Clone</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
             <div className="flex flex-col w-full max-w-screen-xl">
                 <header className="flex flex-auto flex-wrap items-center justify-between gap-3 md:gap-6 p-6">
-                    <div id="logo" className="font-semibold font-mono uppercase leading-none text-lg mx-3">MicroAcquire</div>
+                    <div id="logo" className="font-bold font-mono uppercase leading-none text-lg mx-3">MicroAcquire</div>
                     <nav className="flex flex-wrap flex-auto flex-row items-center justify-center md:justify-start gap-3 md:gap-6 text-sm order-last md:order-none">
                         <ul className="list-none flex flex-auto flex-wrap flex-row gap-3 md:gap-6">
                             <li>
