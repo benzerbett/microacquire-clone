@@ -1,7 +1,9 @@
 import Head from 'next/head'
+import React, {useState, useEffect} from 'react'
 
 
 const Home = (props) => {
+    const [openFilters, setOpenFilters] = useState(false)
     const {startups} = props
     const formatCash = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
     return (
@@ -48,8 +50,8 @@ const Home = (props) => {
                     </nav>
                 </header>
 
-                <main className="grid grid-cols-5 w-full p-2 text-center min-h-screen gap-3">
-                    <aside className="h-full bg-white text-left justify-start rounded-lg col-span-1 p-3 max-h-screen flex flex-col gap-3">
+                <main className="grid sm:grid-cols-5 w-full p-2 text-center min-h-screen gap-3">
+                    <aside className="h-full bg-white text-left justify-start rounded-lg sm:col-span:5 md:col-span-1 p-3 max-h-screen flex flex-col gap-3 mb-6 md:mb-0">
                         <div className="flex flex-col gap-2 p-1">
                             <small className="text-gray-500 font-sans text-xs">Description:</small>
                             <div className="grid grid-cols-2 w-full gap-3">
@@ -201,16 +203,16 @@ const Home = (props) => {
                             </div>
                         </div>
                     </aside>
-                    <div id="content" className="col-span-4 text-left flex flex-col p-3 gap-5">
+                    <div id="content" className="sm:col-span-5 md:col-span-4 text-left flex flex-col p-3 gap-5">
                         {(startups && startups.length > 0) ? startups.map(st => (
-                            <div key={st.id} className="p-7 bg-gray-100 rounded border border-dashed border-gray-300 flex flex-row justify-evenly divide-x-2 divide-gray-300 hover:border-solid hover:bg-white">
+                            <div key={st.id} className="p-7 bg-gray-100 rounded border border-dashed border-gray-300 flex flex-col md:flex-row md:justify-evenly md:divide-x-2 md:divide-gray-300 hover:border-solid hover:bg-white">
                                 <section id={st.id + "_basics"} className="flex flex-col p-3 gap-4 w-full">
-                                    <div className="flex flex-row gap-1 items-center justify-between">
+                                    <div className="flex flex-col md:flex-row gap-1 items-center justify-between">
                                         <div>
                                             <h2 className="font-display text-black font-bold leading-none tracking-tight">{st.name}</h2>
                                             <small className="text-xs text-gray-400 font-display leading-none">{st.url}</small>
                                         </div>
-                                        <div className="border border-blue-400 text-blue-600 items-center justify-between bg-white font-semibold px-5 py-3 rounded flex flex-row gap-2 text-md leading-none">
+                                        <div className="border border-blue-400 text-blue-600 items-center justify-between bg-white font-semibold px-5 py-3 rounded flex flex-row gap-2 sm:text-sm md:text-md leading-none">
                                             <span className="w-3 h-3 bg-blue-600 rounded-full"></span>
                                             <span className="">Premium startup</span>
                                         </div>
@@ -228,21 +230,21 @@ const Home = (props) => {
                                     </div>
                                 </section>
                                 <section id={st.id + "_numbers"} className="flex flex-col p-3 gap-6 w-full">
-                                    <div className="flex flex-row gap-1 items-center justify-between">
+                                    <div className="flex flex-row gap-1 items-center justify-center md:justify-between">
                                         {st.isOpen ? (
-                                            <div className="text-blue-600 items-center justify-between bg-blue-100 font-semibold px-5 py-3 rounded flex flex-row gap-2 text-md leading-none">
+                                            <div className="text-blue-600 items-center justify-between bg-blue-100 font-semibold px-5 py-3 rounded flex flex-row gap-2 sm:text-sm md:text-md leading-none">
                                                 <span className="w-3 h-3 bg-blue-600 rounded-full"></span>
                                                 <span className="">Open to offers</span>
                                             </div>
                                         ) : (
-                                            <div className="text-gray-500 items-center justify-between bg-gray-200 font-semibold px-5 py-3 rounded flex flex-row gap-2 text-md leading-none">
+                                            <div className="text-gray-500 items-center justify-between bg-gray-200 font-semibold px-5 py-3 rounded flex flex-row gap-2 sm:text-sm md:text-md leading-none">
                                                 <span className="w-3 h-3 bg-gray-500 rounded-full"></span>
-                                                <span className="">Offer closed</span>
+                                                <span className="">Not accepting offers</span>
                                             </div>
                                         )}
                                         <div></div>
                                     </div>
-                                    <div className="grid grid-cols-3 gap-1">
+                                    <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-1">
                                         <div id="profit" className="col-span-1 flex flex-col items-center gap-1 mb-3">
                                             <span className="py-3 px-4 bg-blue-600 shadow-sm text-white leading-none text-sm rounded-full font-semibold"> K </span>
                                             <small className="text-gray-500 font-sans text-xs">Annual profit:</small>
@@ -300,7 +302,7 @@ const Home = (props) => {
 
 Home.getInitialProps = async function(context) {
     return fetch('http://localhost:3000/api/startups').then(r=>r.json()).then(stp=>{
-        return {startups: stp, ctx:context}
+        return {startups: stp}
     })
 }
 export default Home;
