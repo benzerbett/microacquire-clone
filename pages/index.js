@@ -244,7 +244,7 @@ const Home = (props) => {
                             {startups && startups.length>0 ? startups.length + " startups shown" : ""}
                         </div>
                         {(startups && startups.length > 0) ? startups.map(st => (
-                            <div key={st.id} className="p-7 bg-gray-100 rounded border border-dashed border-gray-300 flex flex-col md:flex-row md:justify-evenly md:divide-x-2 md:divide-gray-300 hover:border-solid hover:bg-white">
+                            <div key={st.id} className="p-3 md:p-7 bg-gray-100 rounded border border-dashed border-gray-300 flex flex-col md:flex-row md:justify-evenly md:divide-x-2 md:divide-gray-300 hover:border-solid hover:bg-white">
                                 <section id={st.id + "_basics"} className="flex flex-col p-3 gap-4 w-full">
                                     <div className="flex flex-col md:flex-row gap-1 items-center justify-between">
                                         <div>
