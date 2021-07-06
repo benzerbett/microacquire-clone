@@ -6,3 +6,4 @@ A reproduction of the [microacquire.com](https://microacquire.com) UI  [Tailwind
 It uses the new [`Just-in-Time Mode`](https://tailwindcss.com/docs/just-in-time-mode) for Tailwind CSS.
 
 ## Preview
+[microacquire-clone.vercel.app](https://microacquire-clone.vercel.app/)
