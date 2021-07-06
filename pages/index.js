@@ -14,40 +14,40 @@ const Home = (props) => {
             </Head>
 
             <div className="flex flex-col w-full max-w-screen-xl">
-                <header className="flex flex-auto flex-wrap items-center gap-6 p-6">
+                <header className="flex flex-auto flex-wrap items-center justify-between gap-3 md:gap-6 p-6">
                     <div id="logo" className="font-semibold font-mono uppercase leading-none text-lg mx-3">MicroAcquire</div>
-                    <nav className="flex flex-wrap flex-auto flex-row gap-6 text-sm">
-                        <ul className="list-none flex flex-auto flex-wrap flex-row gap-6">
+                    <nav className="flex flex-wrap flex-auto flex-row items-center justify-center md:justify-start gap-3 md:gap-6 text-sm order-last md:order-none">
+                        <ul className="list-none flex flex-auto flex-wrap flex-row gap-3 md:gap-6">
                             <li>
-                                <a href="/" className="flex flex-row gap-2 items-center justify-center">
-                                    <span className="w-4 h-4 bg-red-200 rounded"></span>
-                                    <span>Marketplace</span>
+                                <a href="/" className="flex flex-row gap-1 md:gap-2 items-center justify-center">
+                                    <span className="w-2 h-2 md:w-4 md:h-4 bg-red-200 rounded"></span>
+                                    <span className="text-black">Marketplace</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="/" className="flex flex-row gap-2 items-center justify-center">
-                                    <span className="w-4 h-4 bg-yellow-200 rounded"></span>
-                                    <span>Outcome requests</span>
+                                <a href="/" className="flex flex-row gap-1 md:gap-2 items-center justify-center">
+                                    <span className="w-2 h-2 md:w-4 md:h-4 bg-yellow-200 rounded"></span>
+                                    <span className="text-black">Outcome requests</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="/" className="flex flex-row gap-2 items-center justify-center">
-                                    <span className="w-4 h-4 bg-pink-200 rounded"></span>
-                                    <span>Resources &#8250;</span>
+                                <a href="/" className="flex flex-row gap-1 md:gap-2 items-center justify-center">
+                                    <span className="w-2 h-2 md:w-4 md:h-4 bg-pink-200 rounded"></span>
+                                    <span className="text-black">Resources &#8250;</span>
                                 </a>
                             </li>
                         </ul>
-                        <div id="nav_right">
-                            <ul className="list-none">
-                                <li>
-                                    <a href="/" className="flex flex-row gap-2 items-center justify-center">
-                                        <span className="w-4 h-4 bg-gray-400 rounded"></span>
-                                        <span>Joachim &#8250;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
                     </nav>
+                    <div id="nav_right" className="mb-1">
+                        <ul className="list-none">
+                            <li>
+                                <a href="/" className="flex flex-row gap-2 items-center justify-center">
+                                    <span className="w-4 h-4 bg-gray-400 rounded"></span>
+                                    <span>Joachim &#8250;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </header>
                 <main className="grid sm:grid-cols-5 w-full p-2 text-center min-h-screen gap-3">
                     <div className="sm:col-span:5 md:col-span-5 p-3 rounded grid grid-cols-5">
@@ -241,7 +241,7 @@ const Home = (props) => {
                     </aside>
                     <div id="content" className="sm:col-span-5 md:col-span-4 text-left flex flex-col p-3 gap-5">
                         <div className="text-gray-400 text-xs font-semibold text-left">
-                            {startups && startups.length>0 ? startups.length + " startups shown" : ""}
+                            {startups && startups.length > 0 ? startups.length + " startups shown" : ""}
                         </div>
                         {(startups && startups.length > 0) ? startups.map(st => (
                             <div key={st.id} className="p-3 md:p-7 bg-gray-100 rounded border border-dashed border-gray-300 flex flex-col md:flex-row md:justify-evenly md:divide-x-2 md:divide-gray-300 hover:border-solid hover:bg-white">
