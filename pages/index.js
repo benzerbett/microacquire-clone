@@ -1,10 +1,10 @@
 import Head from 'next/head'
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 
 
 const Home = (props) => {
     const [openFilters, setOpenFilters] = useState(false)
-    const {startups} = props
+    const { startups } = props
     const formatCash = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
     return (
         <div className="flex flex-col items-center justify-start min-h-screen py-2">
@@ -132,17 +132,17 @@ const Home = (props) => {
                         </div>
                         <div className="flex flex-col gap-2 p-1">
                             <small className="text-gray-500 font-sans text-xs">Startup age:</small>
-                            <input type="range" list="stpage" className="text-blue-600 bg-blue-600 range"/>
+                            <input type="range" list="stpage" className="text-blue-600 bg-blue-600 range" />
                             <datalist className="hidden" id="stpage">
-                                <option value="0 months"  label="0 months"></option>
-                                <option value="1-6 months"  label="1-6 months"></option>
-                                <option value="7 months - 1 year"  label="7 months - 1 year"></option>
-                                <option value="1-3 years"  label="1-3 years"></option>
-                                <option value="4-6 years"  label="4-6 years"></option>
-                                <option value="7-10 years"  label="7-10 years"></option>
-                                <option value="10-14 years"  label="10-14 years"></option>
-                                <option value="14-19 years"  label="14-19 years"></option>
-                                <option value="20+ years"  label="20+ years"></option>
+                                <option value="0 months" label="0 months"></option>
+                                <option value="1-6 months" label="1-6 months"></option>
+                                <option value="7 months - 1 year" label="7 months - 1 year"></option>
+                                <option value="1-3 years" label="1-3 years"></option>
+                                <option value="4-6 years" label="4-6 years"></option>
+                                <option value="7-10 years" label="7-10 years"></option>
+                                <option value="10-14 years" label="10-14 years"></option>
+                                <option value="14-19 years" label="14-19 years"></option>
+                                <option value="20+ years" label="20+ years"></option>
                             </datalist>
                             <div className="flex flex-row items-center justify-between w-full gap-3">
                                 <p className="text-sm leading-none">0 months</p>
@@ -300,9 +300,23 @@ const Home = (props) => {
     )
 }
 
-Home.getInitialProps = async function(context) {
-    return fetch('http://localhost:3000/api/startups').then(r=>r.json()).then(stp=>{
-        return {startups: stp}
+Home.getInitialProps = async function (context) {
+    console.log("context.req ==")
+    console.log(context.req.headers)
+    console.log("== context.req")
+    let prtcl = 'https://'
+    if (
+        context.req.headers.host.includes('localhost') || 
+        context.req.headers.host.includes('127.0.0')
+    )
+        { 
+            prtcl = 'http://' 
+        }
+
+    let url = (prtcl + context.req.headers.host) +'/api/startups'
+    console.log("url ========== ", url)
+    return fetch(url).then(r => r.json()).then(stp => {
+        return { startups: stp }
     })
 }
 export default Home;
