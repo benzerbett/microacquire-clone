@@ -340,9 +340,6 @@ const Home = (props) => {
 }
 
 Home.getInitialProps = async function (context) {
-    console.log("context.req ==")
-    console.log(context.req.headers)
-    console.log("== context.req")
     let prtcl = 'https://'
     if (
         context.req.headers.host.includes('localhost') ||
@@ -352,7 +349,6 @@ Home.getInitialProps = async function (context) {
     }
 
     let url = (prtcl + context.req.headers.host) + '/api/startups'
-    console.log("url ========== ", url)
     return fetch(url).then(r => r.json()).then(stp => {
         return { startups: stp }
     })
